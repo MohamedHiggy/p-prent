@@ -1,18 +1,73 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="home container">
+    <div v-if="hasProduct" class="loading">
+      <p class="ploading">
+        Loading data! <i class="fa fa-spinner fa-spin"></i>
+      </p>
+    </div>
+    <div class="row">
+      <Card
+        v-for="product in products"
+        :key="product.id"
+        :pname="product.model_name"
+        :pimg="product.images[0]"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import Card from "@/components/Card.vue";
+import axios from "axios";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld
-  }
+    Card,
+  },
+  data() {
+    return {
+      products: [],
+    };
+  },
+  methods: {
+    loadProduct() {
+      axios
+        .get("http://p-prent.com/api/prints/random")
+        .then((res) => {
+          const productsJson = res.data.data;
+          const productsLength = productsJson.length;
+          for (let index = 0; index < productsLength; index++) {
+            this.products.push(productsJson[index]);
+          }
+        })
+        .catch((err) => console.log(err));
+    },
+  },
+  created() {
+    this.loadProduct();
+  },
+  computed: {
+    hasProduct: function() {
+      return this.products.length <= 0;
+    },
+  },
 };
 </script>
+
+<style lang="scss">
+.home {
+  padding: 100px 0;
+  .loading {
+    padding: 200px 50px;
+    height: 50vh;
+    text-align: center;
+    .ploading {
+      font-size: 28px;
+      font-weight: bold;
+      color: #666666;
+    }
+  }
+}
+</style>
