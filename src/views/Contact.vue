@@ -35,11 +35,7 @@
       <button type="submit" class="btn ">Send</button>
     </form>
     <notifications group="foo" position="center right" />
-    <notifications
-      group="app"
-      position="center left"
-      animation="animation"
-    />
+    <notifications group="app" position="center left" />
   </div>
 </template>
 
@@ -72,7 +68,7 @@ export default {
             text: "<b> Mail send successfully</b>",
             duration: 1000,
             speed: 2000,
-            clean: true
+            clean: true,
           });
         })
         // eslint-disable-next-line prettier/prettier

@@ -1,38 +1,36 @@
 <template>
-  <div class="cart">
+  <div class="cart container">
     <table class="table table-bordered">
       <thead>
         <tr>
           <th scope="col">product img</th>
-          <th scope="col">prand name</th>
+          <th scope="col">prand type</th>
           <th scope="col">product name</th>
           <th scope="col">quantity</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><img src="../assets/imgs/1.jpg" alt="" class="product-img"></td>
-          <td><p class="prand-name">Hp</p></td>
-          <td><p class="product-name">HP LaserJet Pro MFP M148dw</p></td>
+        <tr v-for="(item, index) in this.$store.state.cart" :key="index">
+          <td><img src="../assets/imgs/1.jpg" alt="" class="product-img" /></td>
           <td>
-            <ul class="list-style">
-              <li class="list">
-                <button class="btn" @click="increaseCounter()">
-                  Increase
-                </button>
-              </li>
-              <li class="list">
-                <button class="btn" @click="decreaseCounter(0)">
-                  Decrease
-                </button>
-              </li>
-              <li class="list">
-                <button class="btn" @click="resetCounter">Reset</button>
-              </li>
-            </ul>
+            <p class="prand-name">{{ item.productType }}</p>
+          </td>
+          <td>
+            <p class="product-name">{{ item.productName }}</p>
+          </td>
+          <td>
             <p class="counter-num">
-              {{ counter }}
+              {{ item.productQuantity }}
             </p>
+          </td>
+          <td>
+            <button
+              class="btn btn-danger"
+              @click="$store.commit('removeFromCart', item)"
+            >
+              Delete <i class="fa fa-times"></i>
+            </button>
           </td>
         </tr>
       </tbody>

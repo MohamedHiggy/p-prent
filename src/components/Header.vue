@@ -18,22 +18,30 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item ">
-          <router-link to="/" class="nav-link">Home</router-link>
+          <router-link to="/" class="nav-link" active-class="active" exact>
+            Home
+          </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/shop" class="nav-link">Shop</router-link>
+          <router-link to="/shop" class="nav-link" active-class="active">
+            Shop
+          </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/about" class="nav-link">About Us</router-link>
+          <router-link to="/about" class="nav-link" active-class="active">
+            About Us
+          </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/contact" class="nav-link">Contact</router-link>
+          <router-link to="/contact" class="nav-link" active-class="active">
+            Contact
+          </router-link>
         </li>
       </ul>
       <div class="my-2 my-lg-0 shopping-basket">
         <router-link to="/cart">
           <i class="fa fa-shopping-basket fa-2x"></i>
-          <span class="counter">0</span>
+          <span class="counter">{{ getGetters }}</span>
         </router-link>
       </div>
     </div>
@@ -43,6 +51,16 @@
 <script>
 export default {
   name: "NavBar",
+  data() {
+    return {
+      cartCounter: 1
+    }
+  },
+  computed: {
+    getGetters() {
+      return this.$store.getters.cartCount;
+    }
+  }
 };
 </script>
 

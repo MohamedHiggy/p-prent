@@ -1,8 +1,19 @@
 <template>
   <div class="card-details">
-    <h1>This is an card details page</h1>
+    <addToCart />
   </div>
 </template>
+
+<script>
+// @ is an alias to /src
+import addToCart from "@/components/AddToCart.vue";
+export default {
+  components: {
+    addToCart
+  },
+}
+</script>
+
 
 <style lang="scss">
 .card-details {

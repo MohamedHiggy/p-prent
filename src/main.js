@@ -7,6 +7,9 @@ import axios from "axios";
 import Notifications from "vue-notification";
 Vue.use(Notifications);
 
+import VueCarousel from "vue-carousel";
+Vue.use(VueCarousel);
+
 import jQuery from "jquery";
 window.$ = window.jQuery = jQuery;
 

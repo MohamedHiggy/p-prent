@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Contact from "../views/Contact.vue";
 import About from "../views/About";
 import Cart from "../views/Cart";
+import NotFoundPage from "../views/NotFoundPage";
 
 Vue.use(VueRouter);
 
@@ -45,6 +46,7 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "about" */ "../views/CardDetails.vue"),
     },
+    { path: "*", component: NotFoundPage },
 ];
 
 const router = new VueRouter({

@@ -10,7 +10,14 @@
         v-for="product in products"
         :key="product.id"
         :pname="product.model_name"
-        :pimg="product.images[0]"
+        :pid="product.id"
+        :pimg="product.images"
+        :pdesc="product.description"
+        :pfeatures="product.features"
+        :ptype="product.type"
+        :psize="product.size"
+        :puse="product.how_to_use"
+        :pdriver="product.driver"
       />
     </div>
   </div>
