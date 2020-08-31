@@ -1,6 +1,6 @@
 <template>
   <div class="shop container">
-    <div class="header-btns">
+    <!-- <div class="header-btns">
       <ul class="list-style">
         <li class="list">
           <button
@@ -47,7 +47,7 @@
           </button>
         </li>
       </ul>
-    </div>
+    </div> -->
     <loading :active.sync="isLoading"></loading>
     <div
       class="card-deatails row"
@@ -112,20 +112,20 @@ export default {
     CardFilter,
     Loading,
   },
-  computed: {
-    filteredproducts: function() {
-      var vm = this;
-      var category = vm.filter;
+  // computed: {
+  //   filteredproducts: function() {
+  //     var vm = this;
+  //     var category = vm.filter;
 
-      if (category === "All") {
-        return vm.products;
-      } else {
-        return vm.products.filter(function(a) {
-          return a.category === name;
-        });
-      }
-    },
-  },
+  //     if (category === "All") {
+  //       return vm.products;
+  //     } else {
+  //       return vm.products.filter(function(a) {
+  //         return a.category === name;
+  //       });
+  //     }
+  //   },
+  // },
 };
 </script>
 

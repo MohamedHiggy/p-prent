@@ -1,11 +1,7 @@
 <template>
   <div class="card-details container">
     <div class="header">
-      <carousel
-        :perPage="2"
-        :autoplay="true"
-        :loop="true"
-      >
+      <carousel :perPage="2" :autoplay="true" :loop="true">
         <slide v-for="img in $route.params.imgs" :key="img.id">
           <img class="card-img-top" :src="img.images" alt="Card image cap" />
         </slide>

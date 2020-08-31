@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import swal from "sweetalert";
 
 Vue.use(Vuex);
 
@@ -27,6 +28,11 @@ export default new Vuex.Store({
             let index = state.cart.indexOf(item);
             state.cart.splice(index, 1);
             this.commit("saveData");
+            swal({
+                title: "product deleted successfully!",
+                icon: "success",
+                button: "close",
+            });
         },
         // emptyCart(state) {
         //     state.cart = [];

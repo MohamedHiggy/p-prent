@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import swal from "sweetalert";
 import $ from "jquery";
 import minicart from "@/components/MiniCart.vue";
 export default {
@@ -81,13 +80,6 @@ export default {
     minicart,
   },
   methods: {
-    successCart() {
-      swal({
-        title: "product added successfully!",
-        icon: "success",
-        button: "close",
-      });
-    },
     addToCart() {
       $("#minicart").modal("show");
       this.$store.commit("addToCart", this.item);

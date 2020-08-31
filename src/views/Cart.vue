@@ -2,7 +2,12 @@
   <div class="cart container">
     <!-- if no product show item here -->
     <div class="noitems" v-if="this.$store.state.cart == 0">
-      <h1 class="title">No items added!!</h1>
+      <img src="../assets/cart.svg" alt="" />
+      <h1 class="title">
+        Your cart is empty! <br />
+        <span>add more products Now</span>
+      </h1>
+      <router-link to="/shop" class="add-product">add product</router-link>
     </div>
     <div class="Main-table" v-else>
       <table class="table table-bordered">
@@ -94,6 +99,31 @@ export default {
   .noitems {
     padding: 20px 0;
     text-align: center;
+    .title {
+      font-size: 45px;
+      font-weight: bold;
+      text-align: center;
+      color: #242424;
+      span {
+        margin: 0;
+        font-size: 30px;
+        text-align: center;
+        color: #666666;
+      }
+    }
+    .add-product {
+      display: block;
+      background-color: #eaa93f;
+      width: 180px;
+      height: 48px;
+      margin: 0 auto;
+      line-height: 48px;
+      font-weight: 600;
+      font-size: 16px;
+      text-transform: capitalize;
+      color: #ffffff;
+      text-decoration: none;
+    }
   }
   .product-img {
     max-width: 150px;

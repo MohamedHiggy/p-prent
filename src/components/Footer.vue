@@ -1,5 +1,5 @@
 <template>
-  <footer class="page-footer font-small">
+  <footer class="page-footer font-small mt-auto py-3">
     <div class="footer-copyright text-center py-3">
       © 2020 Copyright:
       <a href="https://www.linkedin.com/in/mohamed-higgy-a7875116a/"> 
