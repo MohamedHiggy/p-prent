@@ -40,7 +40,7 @@ const routes = [{
         name: "Shop",
         component: Shop,
     },
-    { path: "*", component: NotFoundPage },
+    { path: "*", name: "NotFoundPage", component: NotFoundPage },
 ];
 
 const router = new VueRouter({

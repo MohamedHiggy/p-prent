@@ -188,7 +188,6 @@ export default {
         data: this.getCartData,
       };
       const formDatapurchase = JSON.stringify(x);
-      console.log(formDatapurchase);
       axios
         .post("http://p-prent.com/api/contact", formDatapurchase)
         .then(() => {
@@ -200,6 +199,7 @@ export default {
             "Important message",
             "success"
           );
+          this.$store.commit("emptyCart");
         })
         .catch(() => {
           $("#completePurchase").modal("hide");
@@ -210,6 +210,7 @@ export default {
             "Important message",
             "error"
           );
+          this.$store.commit("emptyCart");
         });
     },
   },

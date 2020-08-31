@@ -18,14 +18,6 @@
             name: 'CardDetails',
             params: {
               id: Cid,
-              name: Cname,
-              type: Ctype,
-              size: Csize,
-              desc: Cdesc,
-              driver: Cdriver,
-              imgs: Cimgs,
-              use: Cuse,
-              features: Cfeatures
             },
           }"
         >

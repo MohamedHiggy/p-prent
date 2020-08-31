@@ -90,13 +90,19 @@ export default {
   },
   methods: {
     FormContact() {
-      const formDataContact = {
+      const x = {
         name: this.name,
         email: this.email,
         body: this.body,
       };
+      const formDataContact = JSON.stringify(x);
+      console.log(formDataContact);
       axios
-        .post("http://p-prent.com/api/contact", formDataContact)
+        .post("http://p-prent.com/api/contact", formDataContact, {
+          headers: {
+            "Access-Control-Allow-Origin": "*"
+          },
+        })
         // eslint-disable-next-line prettier/prettier
         // eslint-disable-next-line no-unused-vars
         .then((res) => {

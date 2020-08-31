@@ -34,10 +34,10 @@ export default new Vuex.Store({
                 button: "close",
             });
         },
-        // emptyCart(state) {
-        //     state.cart = [];
-        //     this.commit("saveData");
-        // }
+        emptyCart(state) {
+            state.cart = [];
+            this.commit("saveData");
+        }
     },
     actions: {},
     modules: {},

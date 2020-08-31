@@ -2,7 +2,7 @@
   <div class="card-details container">
     <div class="header">
       <carousel :perPage="2" :autoplay="true" :loop="true">
-        <slide v-for="img in $route.params.imgs" :key="img.id">
+        <slide v-for="(img, index) in products.images" :key="index">
           <img class="card-img-top" :src="img.images" alt="Card image cap" />
         </slide>
       </carousel>
@@ -10,31 +10,29 @@
     <div class="middle">
       <ul class="list-style">
         <li class="list">
-          <span class="title">Brand: </span>
-          <span class="title-desc">{{ $route.params.type }}</span>
-        </li>
-        <li class="list">
           <span class="title">Name: </span>
-          <span class="title-desc">{{ $route.params.name }}</span>
+          <span class="title-desc">
+            {{ products.model_name }}
+          </span>
         </li>
         <li class="list">
           <span class="title">Type: </span>
-          <span class="title-desc">{{ $route.params.type }}</span>
+          <span class="title-desc"> {{ products.type }}</span>
         </li>
         <li class="list">
           <span class="title">Size: </span>
-          <span class="title-desc">{{ $route.params.size }}</span>
+          <span class="title-desc"> {{ products.size }}</span>
         </li>
         <li class="list">
           <span class="title">Description: </span>
-          <span class="title-desc">{{ $route.params.desc }}</span>
+          <span class="title-desc"> {{ products.description }}</span>
         </li>
         <li class="list">
           <h3 class="title">Features :</h3>
           <ul
             class="list-style-two"
-            v-for="feature in $route.params.features"
-            :key="feature.id"
+            v-for="(feature, index) in products.features"
+            :key="index"
           >
             <li class="list-two">
               <i class="fa fa-angle-double-right"></i>
@@ -46,11 +44,11 @@
     </div>
     <div class="bottom">
       <button class="btn">Add to cart</button>
-      <a :href="$route.params.use" class="btn">
+      <a :href="products.how_to_use" class="btn">
         Download How to use
         <i class="fa fa-download"></i>
       </a>
-      <a :href="$route.params.driver" class="btn">
+      <a :href="products.driver" class="btn">
         Download the profile
         <i class="fa fa-download"></i>
       </a>
@@ -59,7 +57,29 @@
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+export default {
+  data() {
+    return {
+      products: [],
+    };
+  },
+  created() {
+    const id = this.$route.params.id;
+    axios
+      .get(`http://p-prent.com/api/models/${id}`)
+      .then((res) => {
+        if (res.data.data != null) {
+          this.products = res.data.data;
+        } else {
+          this.$router.push({ name: "NotFoundPage" });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+};
 </script>
 
 <style lang="scss">
