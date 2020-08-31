@@ -4,7 +4,9 @@ import Home from "../views/Home.vue";
 import Contact from "../views/Contact.vue";
 import About from "../views/About";
 import Cart from "../views/Cart";
+import CardDetails from "../views/CardDetails";
 import NotFoundPage from "../views/NotFoundPage";
+import Shop from "../views/Shop";
 
 Vue.use(VueRouter);
 
@@ -29,22 +31,14 @@ const routes = [{
         component: Cart,
     },
     {
-        path: "/shop",
-        name: "Shop",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-            import ( /* webpackChunkName: "about" */ "../views/Shop.vue"),
+        path: "/details/:id",
+        name: "CardDetails",
+        component: CardDetails,
     },
     {
-        path: "/details",
-        name: "CardDetails",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-            import ( /* webpackChunkName: "about" */ "../views/CardDetails.vue"),
+        path: "/shop",
+        name: "Shop",
+        component: Shop,
     },
     { path: "*", component: NotFoundPage },
 ];

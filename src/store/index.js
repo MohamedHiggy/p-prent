@@ -28,10 +28,14 @@ export default new Vuex.Store({
             state.cart.splice(index, 1);
             this.commit("saveData");
         },
+        // emptyCart(state) {
+        //     state.cart = [];
+        //     this.commit("saveData");
+        // }
     },
     actions: {},
     modules: {},
     getters: {
-        cartCount: state => state.cart.length
-    }
+        cartCount: (state) => state.cart.length,
+    },
 });

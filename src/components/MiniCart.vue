@@ -22,6 +22,9 @@
             </button>
           </div>
           <div class="modal-body">
+            <div class="noitems" v-if="this.$store.state.cart == 0">
+              <h1 class="title">No items added!!</h1>
+            </div>
             <ul class="list-style">
               <li
                 class="list"
@@ -74,7 +77,7 @@
 <script>
 import $ from "jquery";
 export default {
-  name: "MiniCart",
+  name: "miniCart",
   props: {
     msg: String,
   },
@@ -87,7 +90,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .mini-cart {
   .list-style {
     padding: 0;

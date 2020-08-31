@@ -2,45 +2,72 @@
   <div class="contact container">
     <form @submit.prevent="FormContact">
       <div class="form-row">
-        <div class="form-group col-lg-6 col-md-6 col-xs-12">
+        <div
+          class="form-group col-lg-6 col-md-6 col-xs-12"
+          :class="{ invalid: $v.name.$error }"
+        >
           <input
             type="text"
             class="form-control"
             placeholder="Enter Name"
             v-model="name"
+            @blur="$v.name.$touch()"
             name="name"
           />
+          <small class="form-text text-muted" v-if="!$v.name.required"
+            >This field must not be empty.</small
+          >
         </div>
-        <div class="form-group col-lg-6 col-md-6 col-xs-12">
+
+        <div
+          class="form-group col-lg-6 col-md-6 col-xs-12"
+          :class="{ invalid: $v.email.$error }"
+        >
           <input
             type="email"
             class="form-control"
             placeholder="Enter email"
             v-model="email"
+            @blur="$v.email.$touch()"
             name="email"
           />
+          <small class="form-text text-muted" v-if="!$v.email.email"
+            >Please provide a valid email address.</small
+          >
+          <small class="form-text text-muted" v-if="!$v.email.required"
+            >This field must not be empty.</small
+          >
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-12">
+        <div class="form-group col-12" :class="{ invalid: $v.body.$error }">
           <textarea
             class="form-control"
             rows="7"
             placeholder="Enter Your msg"
             v-model="body"
+            @blur="$v.body.$touch()"
             name="body"
           ></textarea>
+
+          <small class="form-text text-muted" v-if="!$v.body.required"
+            >This field must not be empty.</small
+          >
         </div>
       </div>
-      <button type="submit" class="btn ">Send</button>
+      <button type="submit" class="btn btn-send" :disabled="$v.$invalid">
+        Send
+      </button>
     </form>
     <notifications group="foo" position="center right" />
-    <notifications group="app" position="center left" />
+    <notifications group="app" position="bottom right" />
   </div>
 </template>
 
 <script>
+import { required, email } from "vuelidate/lib/validators";
 import axios from "axios";
+import notifications from "../helpers/Notifications";
 export default {
   data() {
     return {
@@ -48,6 +75,18 @@ export default {
       email: "",
       body: "",
     };
+  },
+  validations: {
+    name: {
+      required,
+    },
+    body: {
+      required,
+    },
+    email: {
+      required,
+      email,
+    },
   },
   methods: {
     FormContact() {
@@ -61,27 +100,22 @@ export default {
         // eslint-disable-next-line prettier/prettier
         // eslint-disable-next-line no-unused-vars
         .then((res) => {
-          this.$notify({
-            group: "foo",
-            type: "success",
-            title: "Important message",
-            text: "<b> Mail send successfully</b>",
-            duration: 1000,
-            speed: 2000,
-            clean: true,
-          });
+          notifications.push(
+            "foo",
+            "<b> Mail send successfully </b>",
+            "Important message",
+            "success"
+          );
         })
         // eslint-disable-next-line prettier/prettier
         // eslint-disable-next-line no-unused-vars
         .catch((err) => {
-          this.$notify({
-            group: "app",
-            type: "error",
-            title: "Important message",
-            text: "<b> Mail not send </b>",
-            duration: 1000,
-            speed: 2000,
-          });
+          notifications.push(
+            "app",
+            "<b> Mail not send </b>",
+            "Important message",
+            "error"
+          );
         });
     },
   },
@@ -100,6 +134,13 @@ export default {
       box-shadow: none;
     }
   }
+  .form-group.invalid input {
+    border-color: red;
+  }
+  .form-group.invalid textarea {
+    border-color: red;
+  }
+
   .btn {
     width: 150px;
     background-color: #f1ac06;

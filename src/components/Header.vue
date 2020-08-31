@@ -52,9 +52,7 @@
 export default {
   name: "NavBar",
   data() {
-    return {
-      cartCounter: 1
-    }
+    return {}
   },
   computed: {
     getGetters() {

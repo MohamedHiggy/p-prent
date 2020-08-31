@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-6 col-md-6 col-xs-12">
+  <div class="col-lg-3 col-md-3 col-xs-12">
     <div class="card" style="height: 100%;">
       <carousel :perPage="1">
         <slide v-for="(img, index) in pimg" :key="index.id">
@@ -12,45 +12,34 @@
           {{ ptype }}
         </p>
         <p class="card-details">
-          <span class="title">Size:</span>
-          {{ psize }}
-        </p>
-        <p class="card-details">
           <span class="title">Name:</span>
           {{ pname }}
         </p>
-        <ul
-          class="list-style-two"
-          v-for="(feature, index) in pfeatures"
-          :key="index.id"
-        >
-          <li class="list">
-            <i class="fa fa-chevron-circle-right"></i>
-            {{ feature.feature }}
-          </li>
-        </ul>
-        <p class="card-details">
-          <span class="title">Desc:</span>
-          {{ pdesc }}
-        </p>
-
-        <ul class="list-style-two">
-          <li class="list">
-            <a :href="pdriver" class="btn btn-drivers">install drive</a>
-          </li>
-          <li class="list">
-            <a :href="puse" class="btn btn-drivers">How to use</a>
-          </li>
-        </ul>
         <ul class="list-style">
           <li class="list">
-            <router-link to="/details" class="btn btn-primary"
-              >Details</router-link
+            <router-link
+              class="btn btn-primary"
+              :to="{
+                name: 'CardDetails',
+                params: {
+                  id: pid,
+                  name: pname,
+                  type: ptype,
+                  size: psize,
+                  desc: pdesc,
+                  driver: pdriver,
+                  imgs: pimg,
+                  use: puse,
+                  features: pfeatures,
+                },
+              }"
             >
+              Details
+            </router-link>
           </li>
           <li class="list">
             <!--<addToCartBtn ptype pname pid />-->
-            <button class="btn add-to-cart" @click="addToCart">
+            <button class="btn add-to-cart" @click="addToCart()">
               Add to cart
             </button>
           </li>
@@ -62,9 +51,8 @@
 </template>
 
 <script>
-//import swal from "sweetalert";
+import swal from "sweetalert";
 import $ from "jquery";
-//import addToCartBtn from "@/components/AddToCart.vue";
 import minicart from "@/components/MiniCart.vue";
 export default {
   name: "Card",
@@ -90,20 +78,16 @@ export default {
     };
   },
   components: {
-    //addToCartBtn,
-    minicart
+    minicart,
   },
   methods: {
-    /*addToCart() {
+    successCart() {
       swal({
         title: "product added successfully!",
         icon: "success",
         button: "close",
       });
     },
-    getimg(x) {
-      return x;
-    }*/
     addToCart() {
       $("#minicart").modal("show");
       this.$store.commit("addToCart", this.item);
@@ -112,20 +96,20 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .card {
-  position: relative;
   transition: 0.2s ease-in-out;
   &:hover {
     box-shadow: 0px 0px 7px 2px #dddddd;
   }
   .VueCarousel {
-    height: 500px;
+    height: 323px;
   }
   .card-body {
     .card-details {
       font-size: 20px;
       color: #333333;
+      padding: 0;
       .title {
         font-size: 22px;
         font-weight: bold;

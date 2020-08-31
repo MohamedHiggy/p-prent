@@ -1,12 +1,13 @@
 import Vue from "vue";
 class Notification {
-    push(msg, title = "Important message", type = "success") {
+    push(group, msg, title = "Important message", type = "success") {
         return Vue.notify({
-            group: "foo",
+            group: `${group}`,
             title: `${title}`,
             text: `${msg}`,
             type: `${type}`,
         });
     }
 }
+// eslint-disable-next-line no-class-assign
 export default Notification = new Notification();
