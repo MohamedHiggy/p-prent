@@ -188,6 +188,7 @@ export default {
         data: this.getCartData,
       };
       const formDatapurchase = JSON.stringify(x);
+      console.log(formDatapurchase);
       axios
         .post("http://p-prent.com/api/contact", formDatapurchase)
         .then(() => {

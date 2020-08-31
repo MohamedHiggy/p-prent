@@ -23,14 +23,6 @@
                 name: 'CardDetails',
                 params: {
                   id: pid,
-                  name: pname,
-                  type: ptype,
-                  size: psize,
-                  desc: pdesc,
-                  driver: pdriver,
-                  imgs: pimg,
-                  use: puse,
-                  features: pfeatures,
                 },
               }"
             >
