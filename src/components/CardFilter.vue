@@ -23,14 +23,29 @@
         >
           Details
         </router-link>
+        <button class="btn add-to-cart" @click="addToCart()">
+          Add to cart
+        </button>
       </div>
     </div>
+    <minicart />
   </div>
 </template>
 
 <script>
+import $ from "jquery";
+import minicart from "@/components/MiniCart.vue";
 export default {
   name: "cardFilter",
+  methods: {
+    addToCart() {
+      $("#minicart").modal("show");
+      this.$store.commit("addToCart", this.item);
+    },
+  },
+  components: {
+    minicart,
+  },
   props: [
     "Cname",
     "Ctype",
@@ -43,10 +58,20 @@ export default {
     "Cuse",
     "Cfeatures",
   ],
+  data() {
+    return {
+      item: {
+        productName: this.Cname,
+        productType: this.Ctype,
+        productQuantity: 1,
+        productId: this.Cid,
+      },
+    };
+  },
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .card-filter {
   margin: 10px 0;
   .card {
@@ -56,6 +81,11 @@ export default {
           color: #666666;
         }
       }
+    }
+    .add-to-cart {
+      margin-left: 15px;
+      background-color: rgb(56, 202, 31);
+      color: #ffffff;
     }
   }
 }

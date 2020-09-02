@@ -1,5 +1,6 @@
 <template>
   <div class="card-details container">
+    <loading :active.sync="isLoading"></loading>
     <div class="header">
       <carousel :perPage="2" :autoplay="true" :loop="true">
         <slide v-for="(img, index) in products.images" :key="index">
@@ -57,6 +58,8 @@
 </template>
 
 <script>
+// Import component
+import Loading from "vue-loading-overlay";
 import axios from "axios";
 export default {
   data() {
@@ -65,6 +68,7 @@ export default {
     };
   },
   created() {
+    this.isLoading = true;
     const id = this.$route.params.id;
     axios
       .get(`http://p-prent.com/api/models/${id}`)
@@ -74,10 +78,14 @@ export default {
         } else {
           this.$router.push({ name: "NotFoundPage" });
         }
+        this.isLoading = false;
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        this.isLoading = true;
       });
+  },
+  components: {
+    Loading
   },
 };
 </script>

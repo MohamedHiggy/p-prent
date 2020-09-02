@@ -37,6 +37,11 @@
             Contact
           </router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/login" class="nav-link" active-class="active">
+            Login
+          </router-link>
+        </li>
       </ul>
       <div class="my-2 my-lg-0 shopping-basket">
         <router-link to="/cart">
