@@ -4,6 +4,9 @@
       <img class="card-img-top" :src="Cimg.images" />
       <div class="card-body">
         <h5 class="card-title">
+          Brand: <span>{{ Cbrand }}</span>
+        </h5>
+        <h5 class="card-title">
           Type: <span>{{ Ctype }}</span>
         </h5>
         <h5 class="card-title">
@@ -47,6 +50,7 @@ export default {
     minicart,
   },
   props: [
+    "Cbrand",
     "Cname",
     "Ctype",
     "Cimg",
