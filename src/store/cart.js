@@ -1,12 +1,7 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import auth from "./auth";
 import swal from "sweetalert";
-
-Vue.use(Vuex);
-
 let cart = window.localStorage.getItem("cart");
-export default new Vuex.Store({
+export default {
+    namespaced: true,
     state: {
         cart: cart ? JSON.parse(cart) : [],
     },
@@ -38,11 +33,9 @@ export default new Vuex.Store({
         emptyCart(state) {
             state.cart = [];
             this.commit("saveData");
-        }
+        },
     },
-    actions: {},
-    modules: { auth },
     getters: {
         cartCount: (state) => state.cart.length,
     },
-});
+};

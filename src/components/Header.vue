@@ -42,6 +42,19 @@
             Login
           </router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/Signup" class="nav-link" active-class="active">
+            Signup
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/profile" class="nav-link" active-class="active">
+            Profile
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="btn nav-link btn-dark" active-class="active">Log out</a>
+        </li>
       </ul>
       <div class="my-2 my-lg-0 shopping-basket">
         <router-link to="/cart">
@@ -81,6 +94,10 @@ export default {
       .nav-item {
         .nav-link {
           font-size: 22px;
+        }
+        .btn-dark {
+          font-size: 18px;
+          color: #ffffff;
         }
       }
     }

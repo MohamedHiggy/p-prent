@@ -1,59 +1,35 @@
 <template>
   <div class="login">
     <form class="form-signin" @submit.prevent="onSubmit">
+      <p>admin@app.com</p>
       <div class="form-row">
-        <div
-          class="form-group col-lg-12 col-md-12 col-xs-12"
-          :class="{ invalid: $v.email.$error }"
-        >
+        <div class="form-group col-lg-12 col-md-12 col-xs-12">
           <label for="exampleInputEmail1">Email address</label>
           <input
             type="email"
             id="exampleInputEmail1"
             class="form-control"
             placeholder="Enter email"
-            v-model="email"
-            @blur="$v.email.$touch()"
+            v-model="form.email"
             autocomplete="off"
             name="name"
           />
-          <small class="form-text text-muted" v-if="!$v.email.email"
-            >Please provide a valid email address.</small
-          >
-          <small class="form-text text-muted" v-if="!$v.email.required"
-            >This field must not be empty.</small
-          >
         </div>
       </div>
       <div class="form-row">
-        <div
-          class="form-group col-lg-12 col-md-12 col-xs-12"
-          :class="{ invalid: $v.password.$error }"
-        >
+        <div class="form-group col-lg-12 col-md-12 col-xs-12">
           <label for="exampleInputPassword1">Password</label>
           <input
             type="password"
             id="exampleInputPassword1"
             class="form-control"
             placeholder="Enter password"
-            v-model="password"
+            v-model="form.password"
             name="password"
-            @blur="$v.password.$touch()"
           />
-          <small class="form-text text-muted" v-if="!$v.password.required"
-            >This field must not be empty.</small
-          >
-          <small class="form-text text-muted" v-if="!$v.password.minLen"
-            >You have to be at least
-            {{ $v.password.$params.minLen.min }} character</small
-          >
         </div>
       </div>
-      <button
-        class="btn btn-lg btn-primary btn-block"
-        type="submit"
-        :disabled="$v.$invalid"
-      >
+      <button class="btn btn-lg btn-primary btn-block" type="submit">
         Sign in
       </button>
     </form>
@@ -61,36 +37,27 @@
 </template>
 
 <script>
-import { required, email, minLength } from "vuelidate/lib/validators";
+import { mapActions } from "vuex";
 export default {
   name: "login",
   data() {
     return {
-      email: "",
-      password: "",
+      form: {
+        email: "",
+        password: "",
+      },
     };
   },
-  validations: {
-    email: {
-      required,
-      email,
-    },
-    password: {
-      required,
-      minLen: minLength(8),
-    },
-  },
   methods: {
+    ...mapActions({
+      signIn: "auth/signIn",
+    }),
     onSubmit() {
-      const loginData = {
-        email: this.email,
-        password: this.password,
-      };
-      console.log(loginData);
-      /*this.$store.dispatch("login", {
-        email: loginData.email,
-        password: loginData.password,
-      });*/
+      this.signIn(this.form).then(() => {
+        this.$router.replace({
+          name: "Profile"
+        });
+      });
     },
   },
 };

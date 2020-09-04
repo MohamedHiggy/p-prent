@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import axios from "axios";
+axios.defaults.baseURL = "http://ecommerce.erada-soft.com/api";
 
 import Vuelidate from "vuelidate";
 Vue.use(Vuelidate);

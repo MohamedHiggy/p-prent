@@ -9,6 +9,7 @@ import NotFoundPage from "../views/NotFoundPage";
 import Login from "../views/Login";
 import Signup from "../views/Signup";
 import Shop from "../views/Shop";
+import Profile from "../views/Profile";
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,11 @@ const routes = [{
         path: "/Signup",
         name: "Signup",
         component: Signup,
+    },
+    {
+        path: "/profile",
+        name: "Profile",
+        component: Profile,
     },
     {
         path: "/contact",

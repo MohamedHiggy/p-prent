@@ -28,6 +28,26 @@
       <div class="form-row">
         <div
           class="form-group col-lg-12 col-md-12 col-xs-12"
+          :class="{ invalid: $v.name.$error }"
+        >
+          <label for="exampleInputname">Name</label>
+          <input
+            type="text"
+            id="exampleInputname"
+            class="form-control"
+            placeholder="Enter Your name"
+            v-model="name"
+            name="name"
+            @blur="$v.name.$touch()"
+          />
+          <small class="form-text text-muted" v-if="!$v.name.required"
+            >This field must not be empty.</small
+          >
+        </div>
+      </div>
+      <div class="form-row">
+        <div
+          class="form-group col-lg-12 col-md-12 col-xs-12"
           :class="{ invalid: $v.password.$error }"
         >
           <label for="exampleInputPassword1">Password</label>
@@ -86,6 +106,7 @@ export default {
   name: "login",
   data() {
     return {
+      name: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -100,6 +121,9 @@ export default {
       required,
       minLen: minLength(8),
     },
+    name: {
+      required,
+    },
     confirmPassword: {
       required,
       sameAs: sameAs((vm) => {
@@ -110,6 +134,7 @@ export default {
   methods: {
     onSubmit() {
       const SignupData = {
+        name: this.name,
         email: this.email,
         password: this.password,
         confirmPassword: this.confirmPassword,
